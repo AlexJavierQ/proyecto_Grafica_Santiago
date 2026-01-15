@@ -1,65 +1,178 @@
-import Image from "next/image";
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import ProductCard from '@/components/products/ProductCard'
+import prisma from '@/lib/prisma'
+import Link from 'next/link'
+import { ArrowRight, Truck, Shield, CreditCard, Headphones } from 'lucide-react'
+import styles from './page.module.css'
 
-export default function Home() {
+async function getFeaturedProducts() {
+  const products = await prisma.product.findMany({
+    where: { isActive: true },
+    include: { category: true },
+    take: 8,
+    orderBy: { createdAt: 'desc' },
+  })
+  return products
+}
+
+async function getCategories() {
+  const categories = await prisma.category.findMany({
+    where: { isActive: true },
+    orderBy: { order: 'asc' },
+    include: {
+      _count: { select: { products: true } }
+    }
+  })
+  return categories
+}
+
+export default async function HomePage() {
+  const [products, categories] = await Promise.all([
+    getFeaturedProducts(),
+    getCategories(),
+  ])
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <Navbar />
+      <main>
+        {/* Hero Section */}
+        <section className={styles.hero}>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              Todo lo que necesitas para tu
+              <span className={styles.heroHighlight}> oficina y escuela</span>
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Encuentra la mejor variedad de productos de papelería, suministros de oficina
+              y material escolar con los mejores precios del mercado.
+            </p>
+            <div className={styles.heroButtons}>
+              <Link href="/productos" className={styles.primaryButton}>
+                Ver Catálogo
+                <ArrowRight size={20} />
+              </Link>
+              <Link href="/registro" className={styles.secondaryButton}>
+                Registrarse como Mayorista
+              </Link>
+            </div>
+          </div>
+          <div className={styles.heroImage}>
+            <img
+              src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600"
+              alt="Suministros de oficina"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className={styles.features}>
+          <div className={styles.container}>
+            <div className={styles.featureGrid}>
+              <div className={styles.feature}>
+                <div className={styles.featureIcon}>
+                  <Truck />
+                </div>
+                <h3>Envío Rápido</h3>
+                <p>Entrega a domicilio en 24-48 horas</p>
+              </div>
+              <div className={styles.feature}>
+                <div className={styles.featureIcon}>
+                  <Shield />
+                </div>
+                <h3>Calidad Garantizada</h3>
+                <p>Productos de las mejores marcas</p>
+              </div>
+              <div className={styles.feature}>
+                <div className={styles.featureIcon}>
+                  <CreditCard />
+                </div>
+                <h3>Pago Seguro</h3>
+                <p>Múltiples métodos de pago</p>
+              </div>
+              <div className={styles.feature}>
+                <div className={styles.featureIcon}>
+                  <Headphones />
+                </div>
+                <h3>Soporte 24/7</h3>
+                <p>Atención al cliente todo el día</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Categorías */}
+        <section className={styles.categories}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Explora por Categoría</h2>
+              <Link href="/categorias" className={styles.seeAllLink}>
+                Ver todas <ArrowRight size={18} />
+              </Link>
+            </div>
+            <div className={styles.categoryGrid}>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/productos?categoria=${category.id}`}
+                  className={styles.categoryCard}
+                >
+                  <div className={styles.categoryIcon}>
+                    📦
+                  </div>
+                  <h3>{category.name}</h3>
+                  <span>{category._count.products} productos</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Productos Destacados */}
+        <section className={styles.products}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Productos Destacados</h2>
+              <Link href="/productos" className={styles.seeAllLink}>
+                Ver todos <ArrowRight size={18} />
+              </Link>
+            </div>
+            <div className={styles.productGrid}>
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  wholesalePrice={product.wholesalePrice}
+                  images={product.images}
+                  category={product.category.name}
+                  stock={product.stock}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Mayoristas */}
+        <section className={styles.cta}>
+          <div className={styles.container}>
+            <div className={styles.ctaContent}>
+              <h2>¿Eres comerciante o distribuidor?</h2>
+              <p>
+                Regístrate como cliente mayorista y accede a precios especiales,
+                descuentos por volumen y atención personalizada.
+              </p>
+              <Link href="/registro?tipo=mayorista" className={styles.ctaButton}>
+                Solicitar cuenta mayorista
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
-  );
+      <Footer />
+    </>
+  )
 }

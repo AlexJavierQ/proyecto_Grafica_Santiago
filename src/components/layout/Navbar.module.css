@@ -1,0 +1,259 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 3px solid var(--secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    gap: 1rem;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    transition: opacity 0.2s;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logoImg {
+    height: 60px;
+    width: auto;
+}
+
+.logoText {
+    display: none;
+    color: var(--primary);
+}
+
+@media (min-width: 640px) {
+    .logoText {
+        display: inline;
+    }
+}
+
+/* Búsqueda */
+.searchForm {
+    display: none;
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .searchForm {
+        display: flex;
+    }
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 3rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(255, 230, 7, 0.3);
+}
+
+.searchInput::placeholder {
+    color: var(--muted);
+}
+
+.searchButton {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5rem;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.searchButton:hover {
+    color: var(--primary);
+}
+
+/* Enlaces de navegación */
+.navLinks {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .navLinks {
+        display: flex;
+    }
+}
+
+.navLink {
+    color: var(--primary);
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.navLink:hover {
+    color: var(--secondary-dark);
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width 0.2s;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+/* Acciones */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cartButton {
+    position: relative;
+    padding: 0.5rem;
+    color: var(--primary);
+    transition: color 0.2s;
+}
+
+.cartButton:hover {
+    color: var(--secondary-dark);
+}
+
+.cartBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--secondary);
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userButton {
+    padding: 0.5rem;
+    color: var(--primary);
+    transition: color 0.2s;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .userButton {
+        display: block;
+    }
+}
+
+.userButton:hover {
+    color: var(--secondary-dark);
+}
+
+.menuButton {
+    padding: 0.5rem;
+    color: var(--primary);
+    display: block;
+}
+
+@media (min-width: 1024px) {
+    .menuButton {
+        display: none;
+    }
+}
+
+/* Menú móvil */
+.mobileMenu {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.2s ease-out;
+}
+
+@media (min-width: 1024px) {
+    .mobileMenu {
+        display: none;
+    }
+}
+
+.mobileSearchForm {
+    display: flex;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .mobileSearchForm {
+        display: none;
+    }
+}
+
+.mobileNavLink {
+    padding: 0.75rem 0;
+    color: var(--card-foreground);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.mobileNavLink:hover {
+    color: var(--primary);
+    padding-left: 0.5rem;
+}
+
+.mobileNavLink:last-child {
+    border-bottom: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

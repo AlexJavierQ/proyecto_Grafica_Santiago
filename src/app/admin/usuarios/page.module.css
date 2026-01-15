@@ -1,0 +1,299 @@
+.page {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+.addButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    font-weight: 600;
+    border-radius: var(--radius);
+    transition: all 0.2s;
+}
+
+.addButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .filters {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.searchForm {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    color: var(--foreground);
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.filterGroup {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.select {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    color: var(--foreground);
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Table */
+.tableContainer {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.table th {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+}
+
+.table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* User cell */
+.userCell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.userName {
+    display: block;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.userEmail {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.userCompany {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-style: italic;
+}
+
+/* Date cell */
+.dateCell {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* Badges */
+.roleBadge,
+.statusBadge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.roleADMIN {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.roleWAREHOUSE {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.roleWHOLESALE {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.roleCUSTOMER {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+.statusACTIVE {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.statusPENDING {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.statusINACTIVE {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.statusREJECTED {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.actionButton {
+    padding: 0.5rem;
+    color: var(--muted);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+}
+
+.actionButton:hover {
+    background: var(--background);
+    color: var(--primary);
+}
+
+.deleteButton {
+    padding: 0.5rem;
+    color: var(--muted);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+}
+
+.deleteButton:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.deleteButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Empty state */
+.emptyState {
+    text-align: center;
+    color: var(--muted);
+    padding: 3rem !important;
+}
+
+/* Summary */
+.summary {
+    margin-top: 1rem;
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--muted);
+}

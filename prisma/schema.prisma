@@ -1,0 +1,152 @@
+// Esquema de Base de Datos para Gráfica Santiago
+// E-Commerce + Inventario + Panel Administrativo
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USUARIOS ====================
+model User {
+  id                 String    @id @default(cuid())
+  email              String    @unique
+  password           String
+  name               String
+  phone              String?
+  role               String    @default("CUSTOMER")
+  status             String    @default("ACTIVE")
+  wholesaleRequested Boolean   @default(false)
+  companyName        String?
+  ruc                String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  lastLogin          DateTime?
+
+  addresses          Address[]
+  orders             Order[]
+  inventoryMovements InventoryMovement[]
+
+  @@map("users")
+}
+
+// ==================== DIRECCIONES ====================
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  name       String
+  phone      String
+  address    String
+  city       String
+  province   String
+  postalCode String?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@map("addresses")
+}
+
+// ==================== CATEGORÍAS ====================
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  image       String?
+  order       Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products Product[]
+
+  @@map("categories")
+}
+
+// ==================== PRODUCTOS ====================
+model Product {
+  id             String   @id @default(cuid())
+  sku            String   @unique
+  barcode        String?  @unique
+  name           String
+  description    String?
+  price          Float
+  wholesalePrice Float?
+  stock          Int      @default(0)
+  minStock       Int      @default(5)
+  categoryId     String
+  images         String   @default("[]")
+  specifications String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  category           Category            @relation(fields: [categoryId], references: [id])
+  orderItems         OrderItem[]
+  inventoryMovements InventoryMovement[]
+
+  @@map("products")
+}
+
+// ==================== ÓRDENES ====================
+model Order {
+  id            String   @id @default(cuid())
+  orderNumber   String   @unique
+  userId        String
+  addressId     String
+  subtotal      Float
+  discount      Float    @default(0)
+  shipping      Float    @default(0)
+  total         Float
+  status        String   @default("PENDING")
+  paymentStatus String   @default("PENDING")
+  paymentMethod String?
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user    User        @relation(fields: [userId], references: [id])
+  address Address     @relation(fields: [addressId], references: [id])
+  items   OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  unitPrice Float
+  subtotal  Float
+  createdAt DateTime @default(now())
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+// ==================== INVENTARIO ====================
+model InventoryMovement {
+  id            String   @id @default(cuid())
+  productId     String
+  userId        String
+  type          String
+  quantity      Int
+  previousStock Int
+  newStock      Int
+  reason        String?
+  createdAt     DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@map("inventory_movements")
+}
