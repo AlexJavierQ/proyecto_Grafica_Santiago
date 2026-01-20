@@ -105,6 +105,13 @@
     box-shadow: 0 0 0 4px rgba(249, 226, 25, 0.1);
 }
 
+.select option {
+    background-color: #0f172a;
+    /* Color de fondo oscuro sólido */
+    color: white;
+    padding: 10px;
+}
+
 .formActions {
     display: flex;
     justify-content: flex-end;
