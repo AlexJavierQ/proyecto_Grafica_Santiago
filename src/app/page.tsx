@@ -17,6 +17,8 @@ async function getFeaturedProducts() {
   return products
 }
 
+// async function getFeaturedProducts... (keep as is)
+
 async function getCategories() {
   const categories = await prisma.category.findMany({
     where: { isActive: true },
@@ -28,33 +30,16 @@ async function getCategories() {
   return categories
 }
 
-// Imágenes para categorías
-const categoryImages: Record<string, string> = {
-  'papeleria': 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&q=80',
-  'oficina': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-  'escolar': 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=800&q=80',
-  'tecnologia': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
-  'arte': 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
-  'escritura': 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=800&q=80',
-  'default': 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80'
-}
-
-const getCategoryImage = (name: string) => {
-  const term = name.toLowerCase()
-  if (term.includes('arte') || term.includes('manualidad')) return categoryImages.arte
-  if (term.includes('escolar') || term.includes('escuela')) return categoryImages.escolar
-  if (term.includes('oficina') || term.includes('negocio')) return categoryImages.oficina
-  if (term.includes('escritura') || term.includes('lapiz') || term.includes('boligrafo')) return categoryImages.escritura
-  if (term.includes('tecnologia') || term.includes('computo') || term.includes('accessorio')) return categoryImages.tecnologia
-  if (term.includes('papel') || term.includes('cuaderno')) return categoryImages.papeleria
-  return categoryImages['default']
-}
+// ... remove categoryImages and getCategoryImage functions ...
 
 export default async function HomePage() {
   const [products, categories] = await Promise.all([
     getFeaturedProducts(),
     getCategories(),
   ])
+
+  // Fallback image in case DB holds no image
+  const defaultImage = 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80'
 
   return (
     <>
@@ -81,7 +66,7 @@ export default async function HomePage() {
                   className={`${styles.bentoCard} ${styles[`bento${index + 1}`]}`}
                 >
                   <img
-                    src={getCategoryImage(category.name)}
+                    src={category.image || defaultImage}
                     alt={category.name}
                     className={styles.bentoImage}
                   />
@@ -98,6 +83,7 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+// ... rest of the file
 
         {/* FEATURED PRODUCTS */}
         <section className={styles.featured}>
