@@ -43,7 +43,9 @@ export default async function ProductDetailPage({
         notFound()
     }
 
-    const relatedProducts = await getRelatedProducts(product.categoryId, product.id)
+    const relatedProducts = product.categoryId
+        ? await getRelatedProducts(product.categoryId, product.id)
+        : []
 
     const user = await getCurrentUser()
     const isWholesale = user?.role === 'WHOLESALE'
@@ -64,7 +66,7 @@ export default async function ProductDetailPage({
                             Volver al catálogo
                         </Link>
                         <span className={styles.separator}>/</span>
-                        <span className={styles.categoryName}>{product.category.name}</span>
+                        <span className={styles.categoryName}>{product.category?.name || 'Producto'}</span>
                         <span className={styles.separator}>/</span>
                         <span className={styles.productName}>{product.name}</span>
                     </div>
@@ -89,7 +91,7 @@ export default async function ProductDetailPage({
                             <h1 className={styles.title}>{product.name}</h1>
 
                             <div className={styles.metaInfo}>
-                                <span className={styles.categoryBadge}>{product.category.name}</span>
+                                <span className={styles.categoryBadge}>{product.category?.name || 'Producto'}</span>
                                 <span className={styles.sku}>SKU: {product.sku}</span>
                             </div>
 
@@ -184,7 +186,7 @@ export default async function ProductDetailPage({
                                         price={related.price}
                                         wholesalePrice={related.wholesalePrice}
                                         images={related.images}
-                                        category={product.category.name}
+                                        category={product.category?.name || 'Producto'}
                                         stock={related.stock}
                                     />
                                 ))}
