@@ -28,37 +28,28 @@ export async function POST(
             return NextResponse.json({ error: 'Categoría no encontrada' }, { status: 404 })
         }
 
-        // Bypass Prisma Client validation using raw SQL since the client is out of sync with the DB
-        // 1. Unlink products that are no longer in this category
-        if (productIds.length > 0) {
-            const placeholders = productIds.map(() => '?').join(',')
-            await prisma.$executeRawUnsafe(
-                `UPDATE products SET categoryId = NULL WHERE categoryId = ? AND id NOT IN (${placeholders})`,
-                categoryId,
-                ...productIds
-            )
-        } else {
-            await prisma.$executeRawUnsafe(
-                `UPDATE products SET categoryId = NULL WHERE categoryId = ?`,
-                categoryId
-            )
-        }
+        // Usamos métodos estándar de Prisma para asegurar compatibilidad con PostgreSQL en Vercel
+        // 1. Desvincular productos que ya no pertenecen a esta categoría
+        await prisma.product.updateMany({
+            where: {
+                categoryId: categoryId,
+                id: { notIn: productIds }
+            },
+            data: { categoryId: null as any }
+        })
 
-        // 2. Link all selected products
-        let updatedCount = 0
-        if (productIds.length > 0) {
-            const placeholders = productIds.map(() => '?').join(',')
-            updatedCount = await prisma.$executeRawUnsafe(
-                `UPDATE products SET categoryId = ? WHERE id IN (${placeholders})`,
-                categoryId,
-                ...productIds
-            )
-        }
+        // 2. Vincular los productos seleccionados
+        const updateResult = await prisma.product.updateMany({
+            where: {
+                id: { in: productIds }
+            },
+            data: { categoryId: categoryId }
+        })
 
         return NextResponse.json({
             success: true,
-            updated: updatedCount,
-            message: `${updatedCount} productos procesados correctamente`
+            updated: updateResult.count,
+            message: `${updateResult.count} productos vinculados correctamente`
         })
     } catch (error: any) {
         console.error('Error linking products:', error)
