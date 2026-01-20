@@ -4,17 +4,74 @@
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+    background: var(--background);
+    /* Azul noche corregido */
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 230, 7, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 230, 7, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .card {
     width: 100%;
-    max-width: 420px;
-    background: var(--card);
-    padding: 2.5rem;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    animation: fadeIn 0.3s ease-out;
+    max-width: 440px;
+    background: var(--primary);
+    /* Fondo azul profundo */
+    padding: 3rem;
+    border-radius: 2rem;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.5s ease-out;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Logo */
@@ -22,50 +79,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    gap: 0.6rem;
+    color: white;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-bottom: 2.5rem;
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1);
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logoIcon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 }
 
 /* Títulos */
 .title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--foreground);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--secondary);
+    /* Amarillo corregido */
     text-align: center;
     margin-bottom: 0.5rem;
 }
 
 .subtitle {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.7);
+    /* Blanco suave corregido */
     text-align: center;
     margin-bottom: 2rem;
+    font-size: 1.05rem;
 }
 
 /* Error */
 .error {
-    background: #fef2f2;
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
     border: 1px solid #fecaca;
     color: #dc2626;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-lg);
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
     text-align: center;
+    font-weight: 600;
 }
 
 /* Formulario */
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.35rem;
 }
 
 .formGroup {
@@ -76,25 +143,26 @@
 
 .label {
     font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--card-foreground);
+    font-weight: 700;
+    color: white;
 }
 
 .input {
     width: 100%;
-    padding: 0.875rem 1rem;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
     font-size: 1rem;
-    background: var(--background);
-    color: var(--foreground);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    transition: all 0.3s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--secondary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(249, 226, 25, 0.2);
 }
 
 .input::placeholder {
@@ -112,20 +180,23 @@
 }
 
 .passwordContainer .input {
-    padding-right: 3rem;
+    padding-right: 3.5rem;
 }
 
 .passwordToggle {
     position: absolute;
-    right: 0.75rem;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--muted);
-    transition: color 0.2s;
+    transition: all 0.2s;
+    padding: 0.25rem;
+    border-radius: var(--radius);
 }
 
 .passwordToggle:hover {
-    color: var(--primary);
+    color: var(--secondary);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Options */
@@ -139,25 +210,26 @@
 .remember {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--muted);
+    gap: 0.6rem;
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
+    font-weight: 500;
 }
 
 .remember input {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     accent-color: var(--primary);
 }
 
 .forgotLink {
-    color: var(--primary);
-    font-weight: 500;
-    transition: color 0.2s;
+    color: var(--secondary);
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
 .forgotLink:hover {
-    color: var(--primary-dark);
+    color: white;
 }
 
 /* Submit button */
@@ -167,24 +239,47 @@
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: var(--radius);
-    transition: all 0.2s;
+    padding: 1.15rem;
+    background: linear-gradient(135deg, var(--secondary) 0%, #ffd700 100%);
+    color: var(--primary);
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: var(--radius-lg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 0.5rem;
+    box-shadow: 0 8px 25px rgba(255, 230, 7, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+}
+
+.submitButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.submitButton:hover:not(:disabled)::before {
+    left: 100%;
 }
 
 .submitButton:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 230, 7, 0.5);
 }
 
 .submitButton:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
+    background: linear-gradient(135deg, #94a3b8, #64748b);
+    color: white;
+    box-shadow: none;
 }
 
 .spinner {
@@ -196,7 +291,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 1.5rem 0;
+    margin: 2rem 0;
     color: var(--muted);
     font-size: 0.85rem;
 }
@@ -206,51 +301,44 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: var(--border);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
 /* Register link */
 .registerText {
     text-align: center;
-    color: var(--muted);
-    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
 }
 
 .registerLink {
-    color: var(--primary);
-    font-weight: 600;
-    transition: color 0.2s;
+    color: var(--secondary);
+    font-weight: 700;
+    transition: all 0.2s;
 }
 
 .registerLink:hover {
-    color: var(--primary-dark);
+    color: white;
 }
 
 /* Demo section */
 .demo {
     margin-top: 2rem;
-    padding: 1rem;
-    background: #f0f9ff;
-    border: 1px solid #bae6fd;
-    border-radius: var(--radius);
-    font-size: 0.8rem;
-    color: #0369a1;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .demo p {
-    margin: 0.25rem 0;
+    margin: 0.35rem 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.demo strong {
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 @keyframes spin {

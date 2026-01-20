@@ -2,12 +2,15 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Package, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import styles from './page.module.css'
+import { useAuthStore } from '@/lib/authStore'
 
 export default function LoginPage() {
     const router = useRouter()
+    const { login } = useAuthStore()
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
@@ -39,14 +42,21 @@ export default function LoginPage() {
                 throw new Error(data.error || 'Error al iniciar sesión')
             }
 
-            // Redirigir según el rol
-            if (data.user.role === 'ADMIN') {
-                router.push('/admin')
-            } else if (data.user.role === 'WAREHOUSE') {
-                router.push('/bodega')
-            } else {
-                router.push('/')
-            }
+            // Guardar en el store de autenticación
+            const userRole = data.user.role === 'ADMIN' ? 'admin' :
+                data.user.role === 'MAYORISTA' ? 'mayorista' : 'cliente'
+
+            login({
+                id: data.user.id,
+                email: data.user.email,
+                name: data.user.name,
+                role: userRole
+            })
+
+            // Redirigir a la página solicitada o al inicio
+            const params = new URLSearchParams(window.location.search)
+            const redirectTo = params.get('redirect') || '/'
+            router.push(redirectTo)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error desconocido')
         } finally {
@@ -59,8 +69,13 @@ export default function LoginPage() {
             <div className={styles.card}>
                 {/* Logo */}
                 <Link href="/" className={styles.logo}>
-                    <Package className={styles.logoIcon} />
-                    <span>Gráfica Santiago</span>
+                    <Image
+                        src="/img/logo.png"
+                        alt="Gráfica Santiago"
+                        width={180}
+                        height={55}
+                        priority
+                    />
                 </Link>
 
                 <h1 className={styles.title}>Iniciar Sesión</h1>

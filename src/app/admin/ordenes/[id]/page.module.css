@@ -1,0 +1,220 @@
+.container {
+    padding: 1.25rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, rgba(249, 226, 25, 0.1) 0%, rgba(249, 226, 25, 0.02) 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 24px;
+    border: 1px solid rgba(249, 226, 25, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.titleGroup h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--secondary);
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.02em;
+}
+
+.orderDate {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.statusBadge {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid transparent;
+}
+
+/* Status Timeline */
+.statusTimeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem 3rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.timelineStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.timelineIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+}
+
+.timelineStep.active .timelineIcon {
+    background: var(--secondary);
+    color: var(--primary);
+    box-shadow: 0 0 20px rgba(249, 226, 25, 0.4);
+}
+
+.timelineLine {
+    position: absolute;
+    top: 22px;
+    left: calc(50% + 25px);
+    width: calc(100% - 50px);
+    height: 3px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timelineStep.active .timelineLine {
+    background: var(--secondary);
+    box-shadow: 0 0 10px rgba(249, 226, 25, 0.2);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 1.5rem;
+}
+
+/* Card */
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1.25rem 0;
+}
+
+/* Table */
+.table th {
+    padding: 1rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table td {
+    padding: 1rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.productName {
+    font-weight: 700;
+    color: white;
+}
+
+.productSku {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Order Summary */
+.orderSummary {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.totalRow {
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: white;
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Status Controls */
+.statusControls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.select,
+.input,
+.textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.saveBtn {
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.saveBtn:hover:not(:disabled) {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(249, 226, 25, 0.3);
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

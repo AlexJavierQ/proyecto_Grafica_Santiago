@@ -1,0 +1,195 @@
+.main {
+    min-height: auto;
+    padding: 0.75rem 0 1.5rem;
+    background: var(--background);
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: var(--secondary);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 140px;
+        grid-auto-flow: dense;
+        gap: 0.6rem;
+    }
+
+    /* Mantener distribución bento pero más compacta */
+    .card:nth-child(1),
+    .card:nth-child(6) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+
+.card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--primary);
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    /* Llenar celda */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    /* Para animación */
+    animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    border-color: var(--secondary);
+}
+
+.imageWrapper {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .image {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--primary) 0%, rgba(10, 61, 98, 0.4) 100%);
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+}
+
+.card:hover .overlay {
+    opacity: 0.6;
+}
+
+.cardContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    transform: translateY(10px);
+    transition: transform 0.4s ease;
+}
+
+.card:hover .cardContent {
+    transform: translateY(0);
+}
+
+.cardTitle {
+    font-size: 1.4rem;
+    /* Un poco más pequeño */
+    font-weight: 800;
+    color: var(--secondary);
+    /* Normalizado a amarillo */
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.card:hover .cardTitle {
+    color: var(--secondary);
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productCount {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.arrow {
+    width: 36px;
+    /* Reducido de 44px */
+    height: 36px;
+    background: var(--secondary);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    transform: translateX(-10px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .arrow {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 8rem 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.25rem;
+}

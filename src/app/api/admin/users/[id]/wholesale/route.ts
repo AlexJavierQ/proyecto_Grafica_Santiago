@@ -27,7 +27,7 @@ export async function POST(
         }
 
         // Verificar que tiene solicitud pendiente
-        if (!user.wholesaleRequested || user.status !== 'PENDING') {
+        if (!user.wholesaleRequested) {
             return NextResponse.json(
                 { error: 'Este usuario no tiene una solicitud mayorista pendiente' },
                 { status: 400 }

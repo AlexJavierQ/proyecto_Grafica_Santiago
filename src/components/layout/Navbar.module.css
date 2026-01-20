@@ -1,21 +1,38 @@
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    background: white;
-    border-bottom: 3px solid var(--secondary);
-    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transparent state - for home page when at top */
+.transparent {
+    background: transparent;
+    backdrop-filter: blur(0);
+    border-bottom: none;
+    box-shadow: none;
+}
+
+/* Solid state - when scrolled or on other pages */
+.solid {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(249, 226, 25, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .container {
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
-    gap: 1rem;
+    height: 64px;
+    gap: 0.75rem;
 }
 
 /* Logo */
@@ -23,10 +40,13 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--primary);
+    color: white;
+    /* Blanco sobre azul */
     font-weight: 700;
     font-size: 1.25rem;
     transition: opacity 0.2s;
+    filter: brightness(0) invert(1);
+    /* Forzar logo a blanco si es necesario */
 }
 
 .logo:hover {
@@ -34,13 +54,13 @@
 }
 
 .logoImg {
-    height: 60px;
+    height: 45px;
     width: auto;
 }
 
 .logoText {
     display: none;
-    color: var(--primary);
+    color: white;
 }
 
 @media (min-width: 640px) {
@@ -53,7 +73,7 @@
 .searchForm {
     display: none;
     flex: 1;
-    max-width: 500px;
+    max-width: 400px;
     position: relative;
 }
 
@@ -65,24 +85,25 @@
 
 .searchInput {
     width: 100%;
-    padding: 0.75rem 1rem;
-    padding-right: 3rem;
-    border: 2px solid var(--border);
+    padding: 0.6rem 1rem;
+    padding-right: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
-    background: var(--background);
-    color: var(--foreground);
-    font-size: 0.95rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
 }
 
 .searchInput:focus {
     outline: none;
     border-color: var(--secondary);
-    box-shadow: 0 0 0 3px rgba(255, 230, 7, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 4px rgba(249, 226, 25, 0.2);
 }
 
 .searchInput::placeholder {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .searchButton {
@@ -91,19 +112,109 @@
     top: 50%;
     transform: translateY(-50%);
     padding: 0.5rem;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.6);
     transition: color 0.2s;
 }
 
 .searchButton:hover {
-    color: var(--primary);
+    color: var(--secondary);
+}
+
+/* Resultados de búsqueda */
+.searchResults {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow: hidden;
+    padding: 0.5rem;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.searchItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-lg);
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.searchItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.searchItemImage {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius);
+    object-fit: cover;
+    background: white;
+}
+
+.searchItemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.searchItemName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.searchItemPrice {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+.searchItemCategory {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.noResults {
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.searchLoading {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    color: var(--secondary);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Enlaces de navegación */
 .navLinks {
     display: none;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 @media (min-width: 1024px) {
@@ -113,14 +224,16 @@
 }
 
 .navLink {
-    color: var(--primary);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
-    transition: color 0.2s;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
     position: relative;
+    white-space: nowrap;
 }
 
 .navLink:hover {
-    color: var(--secondary-dark);
+    color: var(--secondary);
 }
 
 .navLink::after {
@@ -147,51 +260,87 @@
 
 .cartButton {
     position: relative;
-    padding: 0.5rem;
-    color: var(--primary);
-    transition: color 0.2s;
+    padding: 0.65rem;
+    color: white;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
 }
 
 .cartButton:hover {
-    color: var(--secondary-dark);
+    color: var(--secondary);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
 }
 
 .cartBadge {
     position: absolute;
     top: 0;
     right: 0;
-    background: var(--secondary);
-    color: var(--primary);
-    font-size: 0.7rem;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 0.65rem;
     font-weight: 700;
-    min-width: 18px;
-    height: 18px;
+    min-width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    animation: badgePop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .userButton {
-    padding: 0.5rem;
-    color: var(--primary);
-    transition: color 0.2s;
+    padding: 0.65rem;
+    color: white;
+    transition: all 0.3s ease;
     display: none;
+    align-items: center;
+    border-radius: var(--radius);
 }
 
 @media (min-width: 768px) {
     .userButton {
-        display: block;
+        display: flex;
     }
 }
 
 .userButton:hover {
-    color: var(--secondary-dark);
+    color: var(--secondary);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.userName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .userName {
+        display: inline;
+    }
 }
 
 .menuButton {
     padding: 0.5rem;
-    color: var(--primary);
+    color: white;
     display: block;
 }
 
@@ -256,4 +405,66 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Botón Admin */
+.adminButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(249, 226, 25, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.adminButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 226, 25, 0.5);
+}
+
+/* User Menu */
+.userMenu {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .userMenu {
+        display: flex;
+    }
+}
+
+.logoutButton {
+    padding: 0.5rem;
+    color: var(--muted);
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Mobile Admin Link */
+.adminMobileLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--secondary) 0%, #ffd700 100%);
+    color: var(--primary) !important;
+    font-weight: 700;
+    border-radius: var(--radius);
+    margin: 0.5rem 0;
 }

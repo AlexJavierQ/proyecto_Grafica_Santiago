@@ -4,6 +4,7 @@ import { Check, X, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import styles from './page.module.css'
+import { toast } from 'sonner'
 
 interface ApproveRejectButtonsProps {
     userId: string
@@ -15,33 +16,44 @@ export default function ApproveRejectButtons({ userId, userName }: ApproveReject
     const [isLoading, setIsLoading] = useState<'approve' | 'reject' | null>(null)
 
     const handleAction = async (action: 'approve' | 'reject') => {
-        const confirmMessage = action === 'approve'
-            ? `¿Aprobar a "${userName}" como mayorista? Podrá ver precios mayoristas inmediatamente.`
-            : `¿Rechazar la solicitud de "${userName}"? Se le notificará por email.`
+        // We'll use a custom toast for confirmation instead of window.confirm
+        toast(action === 'approve' ? `¿Aprobar a ${userName}?` : `¿Rechazar a ${userName}?`, {
+            description: action === 'approve'
+                ? 'El usuario podrá ver precios mayoristas inmediatamente.'
+                : 'La solicitud será rechazada y el usuario notificado.',
+            action: {
+                label: action === 'approve' ? 'Aprobar' : 'Rechazar',
+                onClick: async () => {
+                    setIsLoading(action)
+                    try {
+                        const res = await fetch(`/api/admin/users/${userId}/wholesale`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action }),
+                        })
 
-        if (!confirm(confirmMessage)) {
-            return
-        }
+                        if (!res.ok) {
+                            const data = await res.json()
+                            throw new Error(data.error || 'Error al procesar solicitud')
+                        }
 
-        setIsLoading(action)
-        try {
-            const res = await fetch(`/api/admin/users/${userId}/wholesale`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action }),
-            })
+                        toast.success(action === 'approve'
+                            ? `¡${userName} ahora es mayorista!`
+                            : `Solicitud de ${userName} rechazada.`)
 
-            if (!res.ok) {
-                const data = await res.json()
-                throw new Error(data.error || 'Error al procesar solicitud')
+                        router.refresh()
+                    } catch (error) {
+                        toast.error(error instanceof Error ? error.message : 'Error al procesar')
+                    } finally {
+                        setIsLoading(null)
+                    }
+                }
+            },
+            cancel: {
+                label: 'Cancelar',
+                onClick: () => { }
             }
-
-            router.refresh()
-        } catch (error) {
-            alert(error instanceof Error ? error.message : 'Error al procesar')
-        } finally {
-            setIsLoading(null)
-        }
+        })
     }
 
     return (

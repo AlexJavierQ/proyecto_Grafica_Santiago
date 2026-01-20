@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏪 Gráfica Santiago - Plataforma E-Commerce
 
-## Getting Started
+Plataforma de comercio electrónico desarrollada para **Gráfica Santiago**, una empresa dedicada a la venta de productos de papelería, suministros de oficina y material escolar en Ecuador.
 
-First, run the development server:
+## 📋 Descripción del Proyecto
+
+Este proyecto es un prototipo funcional de e-commerce desarrollado como proyecto académico de 4to ciclo. La plataforma incluye:
+
+- 🛒 **Tienda Online**: Catálogo de productos con filtros, búsqueda y paginación
+- 👨‍💼 **Panel de Administración**: Gestión de productos, usuarios, órdenes e inventario
+- 👥 **Gestión de Usuarios**: CRUD completo con roles (Admin, Bodeguero, Cliente, Mayorista)
+- 📦 **Sistema de Mayoristas**: Proceso de aprobación para cuentas mayoristas
+- 🔐 **Autenticación**: Login, registro y protección de rutas por rol
+
+## 🔗 Enlaces del Proyecto
+
+- **Tablero Jira**: [Ver Sprint Backlog](https://alex45.atlassian.net/jira/software/projects/GRF/boards/37?atlOrigin=eyJpIjoiODdkYjE4YjI2YjUyNGRmNmE3NGVkYmFiYjBhYTE3ZjEiLCJwIjoiaiJ9)
+- **Repositorio GitHub**: [proyecto_Grafica_Santiago](https://github.com/AlexJavierQ/proyecto_Grafica_Santiago)
+
+## 🛠️ Tecnologías Utilizadas
+
+| Tecnología | Uso |
+|------------|-----|
+| **Next.js 16** | Framework React con App Router |
+| **TypeScript** | Tipado estático |
+| **Prisma** | ORM para base de datos |
+| **SQLite** | Base de datos de desarrollo |
+| **Tailwind CSS** | Estilos utilitarios |
+| **CSS Modules** | Estilos componentizados |
+| **bcryptjs** | Hash de contraseñas |
+| **JWT** | Autenticación con tokens |
+
+## 🎨 Paleta de Colores
+
+| Color | Código | Uso |
+|-------|--------|-----|
+| Azul Oscuro | `#012b42` | Color principal |
+| Amarillo | `#ffe607` | Color de acento |
+
+## 🚀 Instalación y Ejecución
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Configurar base de datos
+npx prisma generate
+npx prisma db push
+
+# Poblar con datos de prueba
+npm run db:seed
+
+# Ejecutar en desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 👤 Credenciales de Prueba
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Administrador | `admin@graficasantiago.com` | `password123` |
+| Bodeguero | `bodega@graficasantiago.com` | `password123` |
+| Cliente | `cliente@email.com` | `password123` |
+| Mayorista | `mayorista@empresa.com` | `password123` |
 
-## Learn More
+## 📁 Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                    # Rutas y páginas (App Router)
+│   ├── admin/              # Panel de administración
+│   ├── api/                # API Routes
+│   ├── login/              # Página de login
+│   └── productos/          # Catálogo de productos
+├── components/             # Componentes reutilizables
+│   ├── layout/             # Navbar, Footer
+│   └── products/           # ProductCard
+├── lib/                    # Utilidades y configuración
+│   ├── auth.ts             # Funciones de autenticación
+│   ├── prisma.ts           # Cliente Prisma
+│   └── constants.ts        # Constantes del sistema
+└── prisma/
+    ├── schema.prisma       # Esquema de base de datos
+    └── seed.ts             # Script de datos de prueba
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 Sprints del Proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Sprint 1 ✅ Completado
+- Configuración inicial del proyecto
+- Página principal con Hero section
+- Catálogo de productos
+- Sistema de autenticación
+- Panel de administración básico
+- CRUD de usuarios
+- Gestión de mayoristas
 
-## Deploy on Vercel
+### Sprint 2 🔄 En Progreso
+- Sistema de carrito de compras
+- Página de detalle de producto
+- Checkout simulado
+- CRUD de productos en admin
+- Sistema de inventario
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👨‍💻 Autor
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Alex Javier Q.**
+
+Proyecto académico - 4to Ciclo
+
+---
+
+© 2025 Gráfica Santiago. Todos los derechos reservados.

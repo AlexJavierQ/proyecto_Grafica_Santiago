@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { ShoppingCart, Eye } from 'lucide-react'
 import { formatPrice, parseImages } from '@/lib/utils'
 import styles from './ProductCard.module.css'
+import { useCartStore } from '@/lib/store'
+import { toast } from 'sonner'
 
 interface ProductCardProps {
     id: string
@@ -32,11 +34,30 @@ export default function ProductCard({
     const isLowStock = stock <= 5 && stock > 0
     const isOutOfStock = stock === 0
 
+    // Calculate discount percentage for wholesale
+    const discountPercent = wholesalePrice && price > wholesalePrice
+        ? Math.round(((price - wholesalePrice) / price) * 100)
+        : 0
+
+    const addItem = useCartStore((state) => state.addItem)
+
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault()
         e.stopPropagation()
-        // TODO: Implementar agregar al carrito
-        console.log('Agregar al carrito:', id)
+
+        addItem({
+            id,
+            name,
+            price: displayPrice,
+            quantity: 1,
+            image: mainImage,
+            maxStock: stock
+        })
+
+        toast.success(`${name} agregado al carrito`, {
+            description: 'Puedes ver tus productos en el carrito de compras.',
+            duration: 2000,
+        })
     }
 
     return (
@@ -78,7 +99,12 @@ export default function ProductCard({
                 <div className={styles.priceContainer}>
                     <span className={styles.price}>{formatPrice(displayPrice)}</span>
                     {isWholesale && wholesalePrice && price !== wholesalePrice && (
-                        <span className={styles.originalPrice}>{formatPrice(price)}</span>
+                        <>
+                            <span className={styles.originalPrice}>{formatPrice(price)}</span>
+                            {discountPercent > 0 && (
+                                <span className={styles.discountBadge}>-{discountPercent}%</span>
+                            )}
+                        </>
                     )}
                 </div>
 

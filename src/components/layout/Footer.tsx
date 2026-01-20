@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Package, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
+import Image from 'next/image'
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -10,8 +11,13 @@ export default function Footer() {
                     {/* Info de la empresa */}
                     <div className={styles.column}>
                         <Link href="/" className={styles.logo}>
-                            <Package className={styles.logoIcon} />
-                            <span>Gráfica Santiago</span>
+                            <Image
+                                src="/img/logo.png"
+                                alt="Gráfica Santiago"
+                                width={160}
+                                height={50}
+                                className={styles.logoImg}
+                            />
                         </Link>
                         <p className={styles.description}>
                             Tu tienda de papelería, suministros de oficina y material escolar de confianza.
@@ -36,8 +42,8 @@ export default function Footer() {
                         <ul className={styles.linkList}>
                             <li><Link href="/productos">Productos</Link></li>
                             <li><Link href="/categorias">Categorías</Link></li>
-                            <li><Link href="/ofertas">Ofertas</Link></li>
-                            <li><Link href="/nosotros">Nosotros</Link></li>
+                            <li><Link href="/productos">Ofertas</Link></li>
+                            <li><Link href="/">Nosotros</Link></li>
                         </ul>
                     </div>
 
@@ -47,7 +53,7 @@ export default function Footer() {
                         <ul className={styles.linkList}>
                             <li><Link href="/login">Iniciar Sesión</Link></li>
                             <li><Link href="/registro">Registrarse</Link></li>
-                            <li><Link href="/mis-pedidos">Mis Pedidos</Link></li>
+                            <li><Link href="/perfil">Mis Pedidos</Link></li>
                             <li><Link href="/carrito">Mi Carrito</Link></li>
                         </ul>
                     </div>
@@ -75,8 +81,8 @@ export default function Footer() {
                 <div className={styles.bottom}>
                     <p>&copy; {new Date().getFullYear()} Gráfica Santiago. Todos los derechos reservados.</p>
                     <div className={styles.bottomLinks}>
-                        <Link href="/privacidad">Política de Privacidad</Link>
-                        <Link href="/terminos">Términos y Condiciones</Link>
+                        <Link href="/">Política de Privacidad</Link>
+                        <Link href="/">Términos y Condiciones</Link>
                     </div>
                 </div>
             </div>

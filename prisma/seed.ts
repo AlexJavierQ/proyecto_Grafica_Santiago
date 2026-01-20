@@ -123,64 +123,91 @@ async function main() {
 
     console.log('📁 Categorías creadas')
 
+    // Imágenes de productos desde Unsplash
+    const img = {
+        cuaderno: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&h=400&fit=crop',
+        papel: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&h=400&fit=crop',
+        folder: 'https://images.unsplash.com/photo-1614036634955-ae5e90f9b9eb?w=400&h=400&fit=crop',
+        agenda: 'https://images.unsplash.com/photo-1506784926709-22f1ec395907?w=400&h=400&fit=crop',
+        postit: 'https://images.unsplash.com/photo-1527345931282-806d3b11967f?w=400&h=400&fit=crop',
+        grapadora: 'https://images.unsplash.com/photo-1620899680842-a66fe0d4f56a?w=400&h=400&fit=crop',
+        clips: 'https://images.unsplash.com/photo-1586222515857-6a22fdd2d9c2?w=400&h=400&fit=crop',
+        tijeras: 'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=400&h=400&fit=crop',
+        organizador: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+        colores: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400&h=400&fit=crop',
+        crayones: 'https://images.unsplash.com/photo-1499892477393-f675706cbe6e?w=400&h=400&fit=crop',
+        temperas: 'https://images.unsplash.com/photo-1560005322-a7f7f247b456?w=400&h=400&fit=crop',
+        marcadores: 'https://images.unsplash.com/photo-1598300056393-4aac492f4344?w=400&h=400&fit=crop',
+        lapiz: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=400&h=400&fit=crop',
+        calculadora: 'https://images.unsplash.com/photo-1564466809058-bf4114d55352?w=400&h=400&fit=crop',
+        usb: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=400&fit=crop',
+        mouse: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop',
+        teclado: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop',
+        audifonos: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+        lienzo: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop',
+        pinceles: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop',
+        pintura: 'https://images.unsplash.com/photo-1560005322-a7f7f247b456?w=400&h=400&fit=crop',
+        manualidades: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
+    }
+
     // Crear productos
     const products = [
         // Papelería
-        { name: 'Cuaderno Universitario 100 hojas', description: 'Cuaderno universitario cuadriculado de 100 hojas, tapa dura', price: 2.50, wholesalePrice: 1.80, stock: 150, minStock: 20, categoryId: categories[0].id, sku: 'PAP-CU100', barcode: '7501234567890' },
-        { name: 'Cuaderno Universitario 200 hojas', description: 'Cuaderno universitario cuadriculado de 200 hojas, tapa dura', price: 4.00, wholesalePrice: 3.00, stock: 100, minStock: 15, categoryId: categories[0].id, sku: 'PAP-CU200', barcode: '7501234567891' },
-        { name: 'Resma de Papel A4 500 hojas', description: 'Resma de papel bond A4, 75g/m², ideal para impresión', price: 5.50, wholesalePrice: 4.20, stock: 200, minStock: 30, categoryId: categories[0].id, sku: 'PAP-RES500', barcode: '7501234567892' },
-        { name: 'Folder Manila A4', description: 'Folder manila tamaño A4, paquete de 25 unidades', price: 3.00, wholesalePrice: 2.20, stock: 80, minStock: 10, categoryId: categories[0].id, sku: 'PAP-FOL25', barcode: '7501234567893' },
-        { name: 'Sobre Manila Oficio', description: 'Sobre manila tamaño oficio, paquete de 50 unidades', price: 4.50, wholesalePrice: 3.50, stock: 60, minStock: 10, categoryId: categories[0].id, sku: 'PAP-SOB50', barcode: '7501234567894' },
-        { name: 'Agenda 2024 Ejecutiva', description: 'Agenda ejecutiva 2024, tapa de cuero sintético', price: 12.00, wholesalePrice: 9.00, stock: 45, minStock: 10, categoryId: categories[0].id, sku: 'PAP-AGE24', barcode: '7501234567895' },
-        { name: 'Libreta de Notas A5', description: 'Libreta de notas rayada, 80 hojas, tapa blanda', price: 1.50, wholesalePrice: 1.00, stock: 120, minStock: 20, categoryId: categories[0].id, sku: 'PAP-LIB80', barcode: '7501234567896' },
-        { name: 'Post-it Colores Neon', description: 'Block de notas adhesivas, 100 hojas, colores neón', price: 2.00, wholesalePrice: 1.50, stock: 90, minStock: 15, categoryId: categories[0].id, sku: 'PAP-POST', barcode: '7501234567897' },
+        { name: 'Cuaderno Universitario 100 hojas', description: 'Cuaderno universitario cuadriculado de 100 hojas, tapa dura', price: 2.50, wholesalePrice: 1.80, stock: 150, minStock: 20, categoryId: categories[0].id, sku: 'PAP-CU100', barcode: '7501234567890', images: JSON.stringify([img.cuaderno]) },
+        { name: 'Cuaderno Universitario 200 hojas', description: 'Cuaderno universitario cuadriculado de 200 hojas, tapa dura', price: 4.00, wholesalePrice: 3.00, stock: 100, minStock: 15, categoryId: categories[0].id, sku: 'PAP-CU200', barcode: '7501234567891', images: JSON.stringify([img.cuaderno]) },
+        { name: 'Resma de Papel A4 500 hojas', description: 'Resma de papel bond A4, 75g/m², ideal para impresión', price: 5.50, wholesalePrice: 4.20, stock: 200, minStock: 30, categoryId: categories[0].id, sku: 'PAP-RES500', barcode: '7501234567892', images: JSON.stringify([img.papel]) },
+        { name: 'Folder Manila A4', description: 'Folder manila tamaño A4, paquete de 25 unidades', price: 3.00, wholesalePrice: 2.20, stock: 80, minStock: 10, categoryId: categories[0].id, sku: 'PAP-FOL25', barcode: '7501234567893', images: JSON.stringify([img.folder]) },
+        { name: 'Sobre Manila Oficio', description: 'Sobre manila tamaño oficio, paquete de 50 unidades', price: 4.50, wholesalePrice: 3.50, stock: 60, minStock: 10, categoryId: categories[0].id, sku: 'PAP-SOB50', barcode: '7501234567894', images: JSON.stringify([img.folder]) },
+        { name: 'Agenda 2024 Ejecutiva', description: 'Agenda ejecutiva 2024, tapa de cuero sintético', price: 12.00, wholesalePrice: 9.00, stock: 45, minStock: 10, categoryId: categories[0].id, sku: 'PAP-AGE24', barcode: '7501234567895', images: JSON.stringify([img.agenda]) },
+        { name: 'Libreta de Notas A5', description: 'Libreta de notas rayada, 80 hojas, tapa blanda', price: 1.50, wholesalePrice: 1.00, stock: 120, minStock: 20, categoryId: categories[0].id, sku: 'PAP-LIB80', barcode: '7501234567896', images: JSON.stringify([img.cuaderno]) },
+        { name: 'Post-it Colores Neon', description: 'Block de notas adhesivas, 100 hojas, colores neón', price: 2.00, wholesalePrice: 1.50, stock: 90, minStock: 15, categoryId: categories[0].id, sku: 'PAP-POST', barcode: '7501234567897', images: JSON.stringify([img.postit]) },
 
         // Oficina
-        { name: 'Grapadora Metálica', description: 'Grapadora de metal resistente, capacidad 25 hojas', price: 6.00, wholesalePrice: 4.50, stock: 40, minStock: 8, categoryId: categories[1].id, sku: 'OFI-GRAP', barcode: '7502234567890' },
-        { name: 'Perforadora 2 Huecos', description: 'Perforadora de 2 huecos, capacidad 20 hojas', price: 5.00, wholesalePrice: 3.80, stock: 35, minStock: 8, categoryId: categories[1].id, sku: 'OFI-PERF', barcode: '7502234567891' },
-        { name: 'Caja de Clips Metálicos', description: 'Caja de 100 clips metálicos tamaño estándar', price: 1.00, wholesalePrice: 0.70, stock: 150, minStock: 25, categoryId: categories[1].id, sku: 'OFI-CLIP', barcode: '7502234567892' },
-        { name: 'Cinta Adhesiva Transparente', description: 'Cinta adhesiva transparente 18mm x 50m', price: 1.20, wholesalePrice: 0.85, stock: 100, minStock: 20, categoryId: categories[1].id, sku: 'OFI-CINT', barcode: '7502234567893' },
-        { name: 'Tijeras de Oficina', description: 'Tijeras de acero inoxidable, mango ergonómico', price: 3.50, wholesalePrice: 2.50, stock: 55, minStock: 10, categoryId: categories[1].id, sku: 'OFI-TIJ', barcode: '7502234567894' },
-        { name: 'Dispensador de Cinta', description: 'Dispensador de cinta adhesiva de escritorio', price: 4.00, wholesalePrice: 3.00, stock: 30, minStock: 5, categoryId: categories[1].id, sku: 'OFI-DISP', barcode: '7502234567895' },
-        { name: 'Organizador de Escritorio', description: 'Organizador de plástico con 5 compartimentos', price: 8.00, wholesalePrice: 6.00, stock: 25, minStock: 5, categoryId: categories[1].id, sku: 'OFI-ORG', barcode: '7502234567896' },
-        { name: 'Sacagrapas Metálico', description: 'Sacagrapas de metal resistente', price: 1.50, wholesalePrice: 1.00, stock: 70, minStock: 15, categoryId: categories[1].id, sku: 'OFI-SACA', barcode: '7502234567897' },
+        { name: 'Grapadora Metálica', description: 'Grapadora de metal resistente, capacidad 25 hojas', price: 6.00, wholesalePrice: 4.50, stock: 40, minStock: 8, categoryId: categories[1].id, sku: 'OFI-GRAP', barcode: '7502234567890', images: JSON.stringify([img.grapadora]) },
+        { name: 'Perforadora 2 Huecos', description: 'Perforadora de 2 huecos, capacidad 20 hojas', price: 5.00, wholesalePrice: 3.80, stock: 35, minStock: 8, categoryId: categories[1].id, sku: 'OFI-PERF', barcode: '7502234567891', images: JSON.stringify([img.grapadora]) },
+        { name: 'Caja de Clips Metálicos', description: 'Caja de 100 clips metálicos tamaño estándar', price: 1.00, wholesalePrice: 0.70, stock: 150, minStock: 25, categoryId: categories[1].id, sku: 'OFI-CLIP', barcode: '7502234567892', images: JSON.stringify([img.clips]) },
+        { name: 'Cinta Adhesiva Transparente', description: 'Cinta adhesiva transparente 18mm x 50m', price: 1.20, wholesalePrice: 0.85, stock: 100, minStock: 20, categoryId: categories[1].id, sku: 'OFI-CINT', barcode: '7502234567893', images: JSON.stringify([img.clips]) },
+        { name: 'Tijeras de Oficina', description: 'Tijeras de acero inoxidable, mango ergonómico', price: 3.50, wholesalePrice: 2.50, stock: 55, minStock: 10, categoryId: categories[1].id, sku: 'OFI-TIJ', barcode: '7502234567894', images: JSON.stringify([img.tijeras]) },
+        { name: 'Dispensador de Cinta', description: 'Dispensador de cinta adhesiva de escritorio', price: 4.00, wholesalePrice: 3.00, stock: 30, minStock: 5, categoryId: categories[1].id, sku: 'OFI-DISP', barcode: '7502234567895', images: JSON.stringify([img.organizador]) },
+        { name: 'Organizador de Escritorio', description: 'Organizador de plástico con 5 compartimentos', price: 8.00, wholesalePrice: 6.00, stock: 25, minStock: 5, categoryId: categories[1].id, sku: 'OFI-ORG', barcode: '7502234567896', images: JSON.stringify([img.organizador]) },
+        { name: 'Sacagrapas Metálico', description: 'Sacagrapas de metal resistente', price: 1.50, wholesalePrice: 1.00, stock: 70, minStock: 15, categoryId: categories[1].id, sku: 'OFI-SACA', barcode: '7502234567897', images: JSON.stringify([img.grapadora]) },
 
         // Escolar
-        { name: 'Caja de Colores x12', description: 'Caja de 12 colores de madera de alta calidad', price: 3.00, wholesalePrice: 2.20, stock: 80, minStock: 15, categoryId: categories[2].id, sku: 'ESC-COL12', barcode: '7503234567890' },
-        { name: 'Caja de Colores x24', description: 'Caja de 24 colores de madera profesionales', price: 5.50, wholesalePrice: 4.00, stock: 60, minStock: 12, categoryId: categories[2].id, sku: 'ESC-COL24', barcode: '7503234567891' },
-        { name: 'Crayones x12', description: 'Caja de 12 crayones de cera no tóxicos', price: 2.00, wholesalePrice: 1.40, stock: 100, minStock: 20, categoryId: categories[2].id, sku: 'ESC-CRAY', barcode: '7503234567892' },
-        { name: 'Témperas x6', description: 'Set de 6 témperas lavables, colores básicos', price: 4.00, wholesalePrice: 3.00, stock: 50, minStock: 10, categoryId: categories[2].id, sku: 'ESC-TEMP', barcode: '7503234567893' },
-        { name: 'Marcadores Punta Fina x10', description: 'Set de 10 marcadores punta fina, colores variados', price: 4.50, wholesalePrice: 3.30, stock: 65, minStock: 12, categoryId: categories[2].id, sku: 'ESC-MARC', barcode: '7503234567894' },
-        { name: 'Lápiz HB Caja x12', description: 'Caja de 12 lápices HB con borrador', price: 2.50, wholesalePrice: 1.80, stock: 120, minStock: 25, categoryId: categories[2].id, sku: 'ESC-LAP12', barcode: '7503234567895' },
-        { name: 'Borrador Blanco Grande', description: 'Borrador de goma blanca, no mancha', price: 0.50, wholesalePrice: 0.30, stock: 200, minStock: 40, categoryId: categories[2].id, sku: 'ESC-BOR', barcode: '7503234567896' },
-        { name: 'Sacapuntas Metálico', description: 'Sacapuntas de metal con depósito', price: 0.75, wholesalePrice: 0.50, stock: 150, minStock: 30, categoryId: categories[2].id, sku: 'ESC-SAC', barcode: '7503234567897' },
+        { name: 'Caja de Colores x12', description: 'Caja de 12 colores de madera de alta calidad', price: 3.00, wholesalePrice: 2.20, stock: 80, minStock: 15, categoryId: categories[2].id, sku: 'ESC-COL12', barcode: '7503234567890', images: JSON.stringify([img.colores]) },
+        { name: 'Caja de Colores x24', description: 'Caja de 24 colores de madera profesionales', price: 5.50, wholesalePrice: 4.00, stock: 60, minStock: 12, categoryId: categories[2].id, sku: 'ESC-COL24', barcode: '7503234567891', images: JSON.stringify([img.colores]) },
+        { name: 'Crayones x12', description: 'Caja de 12 crayones de cera no tóxicos', price: 2.00, wholesalePrice: 1.40, stock: 100, minStock: 20, categoryId: categories[2].id, sku: 'ESC-CRAY', barcode: '7503234567892', images: JSON.stringify([img.crayones]) },
+        { name: 'Témperas x6', description: 'Set de 6 témperas lavables, colores básicos', price: 4.00, wholesalePrice: 3.00, stock: 50, minStock: 10, categoryId: categories[2].id, sku: 'ESC-TEMP', barcode: '7503234567893', images: JSON.stringify([img.temperas]) },
+        { name: 'Marcadores Punta Fina x10', description: 'Set de 10 marcadores punta fina, colores variados', price: 4.50, wholesalePrice: 3.30, stock: 65, minStock: 12, categoryId: categories[2].id, sku: 'ESC-MARC', barcode: '7503234567894', images: JSON.stringify([img.marcadores]) },
+        { name: 'Lápiz HB Caja x12', description: 'Caja de 12 lápices HB con borrador', price: 2.50, wholesalePrice: 1.80, stock: 120, minStock: 25, categoryId: categories[2].id, sku: 'ESC-LAP12', barcode: '7503234567895', images: JSON.stringify([img.lapiz]) },
+        { name: 'Borrador Blanco Grande', description: 'Borrador de goma blanca, no mancha', price: 0.50, wholesalePrice: 0.30, stock: 200, minStock: 40, categoryId: categories[2].id, sku: 'ESC-BOR', barcode: '7503234567896', images: JSON.stringify([img.lapiz]) },
+        { name: 'Sacapuntas Metálico', description: 'Sacapuntas de metal con depósito', price: 0.75, wholesalePrice: 0.50, stock: 150, minStock: 30, categoryId: categories[2].id, sku: 'ESC-SAC', barcode: '7503234567897', images: JSON.stringify([img.lapiz]) },
 
         // Tecnología
-        { name: 'Calculadora Científica', description: 'Calculadora científica 240 funciones', price: 15.00, wholesalePrice: 11.00, stock: 30, minStock: 5, categoryId: categories[3].id, sku: 'TEC-CALC', barcode: '7504234567890' },
-        { name: 'Calculadora Básica', description: 'Calculadora de escritorio 12 dígitos', price: 8.00, wholesalePrice: 6.00, stock: 45, minStock: 8, categoryId: categories[3].id, sku: 'TEC-CALB', barcode: '7504234567891' },
-        { name: 'Memoria USB 16GB', description: 'Memoria USB 2.0 de 16GB', price: 7.00, wholesalePrice: 5.00, stock: 50, minStock: 10, categoryId: categories[3].id, sku: 'TEC-USB16', barcode: '7504234567892' },
-        { name: 'Memoria USB 32GB', description: 'Memoria USB 3.0 de 32GB', price: 10.00, wholesalePrice: 7.50, stock: 40, minStock: 8, categoryId: categories[3].id, sku: 'TEC-USB32', barcode: '7504234567893' },
-        { name: 'Mouse Óptico USB', description: 'Mouse óptico USB, 1000 DPI', price: 6.00, wholesalePrice: 4.50, stock: 35, minStock: 7, categoryId: categories[3].id, sku: 'TEC-MOUS', barcode: '7504234567894' },
-        { name: 'Teclado USB Español', description: 'Teclado USB layout español, silencioso', price: 12.00, wholesalePrice: 9.00, stock: 25, minStock: 5, categoryId: categories[3].id, sku: 'TEC-TECL', barcode: '7504234567895' },
-        { name: 'Audífonos Básicos', description: 'Audífonos con micrófono, cable 1.5m', price: 5.00, wholesalePrice: 3.50, stock: 55, minStock: 10, categoryId: categories[3].id, sku: 'TEC-AUD', barcode: '7504234567896' },
-        { name: 'Pad Mouse con Gel', description: 'Pad para mouse con reposamuñecas de gel', price: 8.00, wholesalePrice: 6.00, stock: 30, minStock: 5, categoryId: categories[3].id, sku: 'TEC-PAD', barcode: '7504234567897' },
+        { name: 'Calculadora Científica', description: 'Calculadora científica 240 funciones', price: 15.00, wholesalePrice: 11.00, stock: 30, minStock: 5, categoryId: categories[3].id, sku: 'TEC-CALC', barcode: '7504234567890', images: JSON.stringify([img.calculadora]) },
+        { name: 'Calculadora Básica', description: 'Calculadora de escritorio 12 dígitos', price: 8.00, wholesalePrice: 6.00, stock: 45, minStock: 8, categoryId: categories[3].id, sku: 'TEC-CALB', barcode: '7504234567891', images: JSON.stringify([img.calculadora]) },
+        { name: 'Memoria USB 16GB', description: 'Memoria USB 2.0 de 16GB', price: 7.00, wholesalePrice: 5.00, stock: 50, minStock: 10, categoryId: categories[3].id, sku: 'TEC-USB16', barcode: '7504234567892', images: JSON.stringify([img.usb]) },
+        { name: 'Memoria USB 32GB', description: 'Memoria USB 3.0 de 32GB', price: 10.00, wholesalePrice: 7.50, stock: 40, minStock: 8, categoryId: categories[3].id, sku: 'TEC-USB32', barcode: '7504234567893', images: JSON.stringify([img.usb]) },
+        { name: 'Mouse Óptico USB', description: 'Mouse óptico USB, 1000 DPI', price: 6.00, wholesalePrice: 4.50, stock: 35, minStock: 7, categoryId: categories[3].id, sku: 'TEC-MOUS', barcode: '7504234567894', images: JSON.stringify([img.mouse]) },
+        { name: 'Teclado USB Español', description: 'Teclado USB layout español, silencioso', price: 12.00, wholesalePrice: 9.00, stock: 25, minStock: 5, categoryId: categories[3].id, sku: 'TEC-TECL', barcode: '7504234567895', images: JSON.stringify([img.teclado]) },
+        { name: 'Audífonos Básicos', description: 'Audífonos con micrófono, cable 1.5m', price: 5.00, wholesalePrice: 3.50, stock: 55, minStock: 10, categoryId: categories[3].id, sku: 'TEC-AUD', barcode: '7504234567896', images: JSON.stringify([img.audifonos]) },
+        { name: 'Pad Mouse con Gel', description: 'Pad para mouse con reposamuñecas de gel', price: 8.00, wholesalePrice: 6.00, stock: 30, minStock: 5, categoryId: categories[3].id, sku: 'TEC-PAD', barcode: '7504234567897', images: JSON.stringify([img.mouse]) },
 
         // Arte y Manualidades
-        { name: 'Lienzo 30x40cm', description: 'Lienzo para pintura acrílica/óleo 30x40cm', price: 6.00, wholesalePrice: 4.50, stock: 40, minStock: 8, categoryId: categories[4].id, sku: 'ART-LIE30', barcode: '7505234567890' },
-        { name: 'Lienzo 50x60cm', description: 'Lienzo para pintura acrílica/óleo 50x60cm', price: 10.00, wholesalePrice: 7.50, stock: 25, minStock: 5, categoryId: categories[4].id, sku: 'ART-LIE50', barcode: '7505234567891' },
-        { name: 'Set Pinceles x10', description: 'Set de 10 pinceles variados para acrílico', price: 8.00, wholesalePrice: 6.00, stock: 35, minStock: 7, categoryId: categories[4].id, sku: 'ART-PINC', barcode: '7505234567892' },
-        { name: 'Pintura Acrílica Set x6', description: 'Set de 6 pinturas acrílicas colores básicos', price: 12.00, wholesalePrice: 9.00, stock: 30, minStock: 6, categoryId: categories[4].id, sku: 'ART-ACRI', barcode: '7505234567893' },
-        { name: 'Paleta de Mezcla', description: 'Paleta de plástico para mezclar pinturas', price: 3.00, wholesalePrice: 2.00, stock: 45, minStock: 8, categoryId: categories[4].id, sku: 'ART-PAL', barcode: '7505234567894' },
-        { name: 'Goma Eva Colores x10', description: 'Pack de 10 láminas de goma eva, colores surtidos', price: 4.00, wholesalePrice: 3.00, stock: 60, minStock: 12, categoryId: categories[4].id, sku: 'ART-GOMA', barcode: '7505234567895' },
-        { name: 'Silicona Líquida 250ml', description: 'Silicona líquida para manualidades', price: 3.50, wholesalePrice: 2.50, stock: 50, minStock: 10, categoryId: categories[4].id, sku: 'ART-SILI', barcode: '7505234567896' },
-        { name: 'Escarcha Set x6', description: 'Set de 6 frascos de escarcha, colores variados', price: 5.00, wholesalePrice: 3.80, stock: 40, minStock: 8, categoryId: categories[4].id, sku: 'ART-ESC', barcode: '7505234567897' },
+        { name: 'Lienzo 30x40cm', description: 'Lienzo para pintura acrílica/óleo 30x40cm', price: 6.00, wholesalePrice: 4.50, stock: 40, minStock: 8, categoryId: categories[4].id, sku: 'ART-LIE30', barcode: '7505234567890', images: JSON.stringify([img.lienzo]) },
+        { name: 'Lienzo 50x60cm', description: 'Lienzo para pintura acrílica/óleo 50x60cm', price: 10.00, wholesalePrice: 7.50, stock: 25, minStock: 5, categoryId: categories[4].id, sku: 'ART-LIE50', barcode: '7505234567891', images: JSON.stringify([img.lienzo]) },
+        { name: 'Set Pinceles x10', description: 'Set de 10 pinceles variados para acrílico', price: 8.00, wholesalePrice: 6.00, stock: 35, minStock: 7, categoryId: categories[4].id, sku: 'ART-PINC', barcode: '7505234567892', images: JSON.stringify([img.pinceles]) },
+        { name: 'Pintura Acrílica Set x6', description: 'Set de 6 pinturas acrílicas colores básicos', price: 12.00, wholesalePrice: 9.00, stock: 30, minStock: 6, categoryId: categories[4].id, sku: 'ART-ACRI', barcode: '7505234567893', images: JSON.stringify([img.pintura]) },
+        { name: 'Paleta de Mezcla', description: 'Paleta de plástico para mezclar pinturas', price: 3.00, wholesalePrice: 2.00, stock: 45, minStock: 8, categoryId: categories[4].id, sku: 'ART-PAL', barcode: '7505234567894', images: JSON.stringify([img.pinceles]) },
+        { name: 'Goma Eva Colores x10', description: 'Pack de 10 láminas de goma eva, colores surtidos', price: 4.00, wholesalePrice: 3.00, stock: 60, minStock: 12, categoryId: categories[4].id, sku: 'ART-GOMA', barcode: '7505234567895', images: JSON.stringify([img.manualidades]) },
+        { name: 'Silicona Líquida 250ml', description: 'Silicona líquida para manualidades', price: 3.50, wholesalePrice: 2.50, stock: 50, minStock: 10, categoryId: categories[4].id, sku: 'ART-SILI', barcode: '7505234567896', images: JSON.stringify([img.manualidades]) },
+        { name: 'Escarcha Set x6', description: 'Set de 6 frascos de escarcha, colores variados', price: 5.00, wholesalePrice: 3.80, stock: 40, minStock: 8, categoryId: categories[4].id, sku: 'ART-ESC', barcode: '7505234567897', images: JSON.stringify([img.manualidades]) },
     ]
 
     for (const product of products) {
         await prisma.product.create({ data: product })
     }
 
-    console.log(`📦 ${products.length} productos creados`)
+    console.log(`📦 ${products.length} productos creados con imágenes`)
 
     // Crear dirección para cliente
     await prisma.address.create({

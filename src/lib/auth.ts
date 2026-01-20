@@ -43,3 +43,38 @@ export function getTokenFromCookies(cookieHeader: string | null): string | null 
     }, {} as Record<string, string>)
     return cookies['auth-token'] || null
 }
+
+// Obtener usuario actual (Server Components)
+export async function getCurrentUser() {
+    try {
+        const { cookies } = await import('next/headers')
+        const cookieStore = await cookies()
+        const token = cookieStore.get('auth-token')?.value
+
+        if (!token) return null
+
+        const payload = verifyToken(token)
+        if (!payload) return null
+
+        const prisma = (await import('./prisma')).default
+        const user = await prisma.user.findUnique({
+            where: { id: payload.userId },
+            select: {
+                id: true,
+                email: true,
+                name: true,
+                role: true,
+                status: true,
+                wholesaleRequested: true,
+                companyName: true,
+                ruc: true,
+                phone: true
+            }
+        })
+
+        return user
+    } catch (error) {
+        console.error('Error in getCurrentUser:', error)
+        return null
+    }
+}

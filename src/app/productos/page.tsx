@@ -6,6 +6,7 @@ import SortSelect from './SortSelect'
 import Link from 'next/link'
 import { Filter, Search } from 'lucide-react'
 import styles from './page.module.css'
+import { getCurrentUser } from '@/lib/auth'
 
 async function getProducts(searchParams: Promise<{
     buscar?: string
@@ -79,6 +80,8 @@ export default async function ProductosPage({
     ])
 
     const params = await searchParams
+    const user = await getCurrentUser()
+    const isWholesale = user?.role === 'WHOLESALE'
 
     return (
         <>
@@ -88,6 +91,12 @@ export default async function ProductosPage({
                     {/* Header */}
                     <div className={styles.header}>
                         <div>
+                            {isWholesale && (
+                                <div className={styles.wholesaleIntro}>
+                                    <span className={styles.wholesaleBadge}>Vista Mayorista Activa</span>
+                                    <p>Estás viendo nuestros precios especiales para distribuidores.</p>
+                                </div>
+                            )}
                             <h1 className={styles.title}>Catálogo de Productos</h1>
                             <p className={styles.subtitle}>
                                 {params.buscar
@@ -164,6 +173,7 @@ export default async function ProductosPage({
                                                 images={product.images}
                                                 category={product.category.name}
                                                 stock={product.stock}
+                                                isWholesale={isWholesale}
                                             />
                                         ))}
                                     </div>
