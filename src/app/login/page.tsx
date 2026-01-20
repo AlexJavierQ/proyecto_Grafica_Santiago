@@ -164,13 +164,7 @@ export default function LoginPage() {
                     </Link>
                 </p>
 
-                {/* Demo credentials */}
-                <div className={styles.demo}>
-                    <p><strong>Credenciales de prueba:</strong></p>
-                    <p>Admin: admin@graficasantiago.com</p>
-                    <p>Cliente: cliente@email.com</p>
-                    <p>Contraseña: password123</p>
-                </div>
+
             </div>
         </div>
     )
