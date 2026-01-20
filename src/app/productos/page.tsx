@@ -171,7 +171,7 @@ export default async function ProductosPage({
                                                 price={product.price}
                                                 wholesalePrice={product.wholesalePrice}
                                                 images={product.images}
-                                                category={product.category.name}
+                                                category={product.category?.name || 'Sin Categoría'}
                                                 stock={product.stock}
                                                 isWholesale={isWholesale}
                                             />

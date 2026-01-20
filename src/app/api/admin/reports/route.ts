@@ -42,7 +42,7 @@ export async function GET() {
 
         const categorySummary: Record<string, number> = {}
         salesByCategory.forEach(item => {
-            const catName = item.product.category.name
+            const catName = item.product.category?.name || 'Sin Categoría'
             categorySummary[catName] = (categorySummary[catName] || 0) + item.subtotal
         })
 
