@@ -10,7 +10,11 @@ import styles from './page.module.css'
 import { useSearchParams } from 'next/navigation'
 import confetti from 'canvas-confetti'
 
-export default function CheckoutSuccessPage() {
+import { Suspense } from 'react'
+// import { useEffect, useState } from 'react' // Remove duplicate or unused imports if causing issues, but Suspense is key here
+// ... keep other imports
+
+function SuccessContent() {
     const searchParams = useSearchParams()
     const orderNumber = searchParams.get('order') || 'PENDIENTE'
 
@@ -43,46 +47,54 @@ export default function CheckoutSuccessPage() {
     }, [])
 
     return (
+        <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, type: 'spring' }}
+            className={styles.card}
+        >
+            <div className={styles.iconWrapper}>
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                    className={styles.checkCircle}
+                >
+                    <Check size={48} strokeWidth={3} />
+                </motion.div>
+            </div>
+
+            <h1 className={styles.title}>¡Gracias por tu compra!</h1>
+            <p className={styles.subtitle}>
+                Tu orden ha sido confirmada y prepararemos tu envío lo antes posible.
+            </p>
+
+            <div className={styles.orderInfo}>
+                <span>Número de Orden</span>
+                <strong>{orderNumber}</strong>
+            </div>
+
+            <div className={styles.actions}>
+                <Link href="/productos" className={styles.primaryBtn}>
+                    Seguir Comprando <ShoppingBag size={18} />
+                </Link>
+                <Link href="/" className={styles.secondaryBtn}>
+                    Volver al Inicio <Home size={18} />
+                </Link>
+            </div>
+        </motion.div>
+    )
+}
+
+export default function CheckoutSuccessPage() {
+    return (
         <>
             <Navbar />
             <main className={styles.main}>
                 <div className={styles.container}>
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.5, type: 'spring' }}
-                        className={styles.card}
-                    >
-                        <div className={styles.iconWrapper}>
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                                className={styles.checkCircle}
-                            >
-                                <Check size={48} strokeWidth={3} />
-                            </motion.div>
-                        </div>
-
-                        <h1 className={styles.title}>¡Gracias por tu compra!</h1>
-                        <p className={styles.subtitle}>
-                            Tu orden ha sido confirmada y prepararemos tu envío lo antes posible.
-                        </p>
-
-                        <div className={styles.orderInfo}>
-                            <span>Número de Orden</span>
-                            <strong>{orderNumber}</strong>
-                        </div>
-
-                        <div className={styles.actions}>
-                            <Link href="/productos" className={styles.primaryBtn}>
-                                Seguir Comprando <ShoppingBag size={18} />
-                            </Link>
-                            <Link href="/" className={styles.secondaryBtn}>
-                                Volver al Inicio <Home size={18} />
-                            </Link>
-                        </div>
-                    </motion.div>
+                    <Suspense fallback={<div className={styles.loading}>Cargando confirmación...</div>}>
+                        <SuccessContent />
+                    </Suspense>
                 </div>
             </main>
             <Footer />
