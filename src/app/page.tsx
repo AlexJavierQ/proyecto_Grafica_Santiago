@@ -7,6 +7,10 @@ import Link from 'next/link'
 import { ArrowRight, Zap, Shield, Truck, Star } from 'lucide-react'
 import styles from './page.module.css'
 
+// Forzar renderizado dinámico para que siempre se obtengan datos frescos
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getFeaturedProducts() {
   const products = await prisma.product.findMany({
     where: { isActive: true },
