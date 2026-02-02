@@ -356,79 +356,46 @@ export default function OrderDetailPage() {
                 </div>
 
                 <div className={styles.rightColumn}>
-                    {/* Cliente */}
+                    {/* Información del Pedido */}
                     <div className={styles.card}>
                         <h2 className={styles.cardTitle}>
                             <User size={20} />
-                            Cliente
+                            Información del Pedido
                         </h2>
-                        <div className={styles.customerDetail}>
-                            <div className={styles.detailItem}>
-                                <span className={styles.detailLabel}>Nombre</span>
-                                <span className={styles.detailValue}>{order.user.name}</span>
-                            </div>
-                            <div className={styles.detailItem}>
-                                <span className={styles.detailLabel}>Email</span>
-                                <span className={styles.detailValue}>{order.user.email}</span>
-                            </div>
-                            <div className={styles.detailItem}>
-                                <span className={styles.detailLabel}>Teléfono</span>
-                                <span className={styles.detailValue}>{order.user.phone || 'No registrado'}</span>
-                            </div>
+                        
+                        {/* Cliente */}
+                        <div className={styles.infoSection}>
+                            <h3 className={styles.sectionLabel}>Cliente</h3>
+                            <p className={styles.infoValue}>{order.user.name}</p>
+                            <p className={styles.infoMuted}>{order.user.email}</p>
+                            {order.user.phone && <p className={styles.infoMuted}>{order.user.phone}</p>}
                         </div>
+
+                        {/* Envío */}
+                        {order.address && (
+                            <div className={styles.infoSection}>
+                                <h3 className={styles.sectionLabel}>Envío</h3>
+                                <p className={styles.infoValue}>{order.address.name}</p>
+                                <p className={styles.infoMuted}>{order.address.address}</p>
+                                <p className={styles.infoMuted}>{order.address.city}, {order.address.province}</p>
+                                <p className={styles.infoMuted}>{order.address.phone}</p>
+                            </div>
+                        )}
+
+                        {/* Pago */}
+                        <div className={styles.infoSection}>
+                            <h3 className={styles.sectionLabel}>Pago</h3>
+                            <p className={styles.infoValue}>{order.paymentMethod || 'No especificado'}</p>
+                        </div>
+
+                        {/* Tracking */}
+                        {order.trackingNumber && (
+                            <div className={styles.infoSection}>
+                                <h3 className={styles.sectionLabel}>Seguimiento</h3>
+                                <p className={styles.trackingCode}>{order.trackingNumber}</p>
+                            </div>
+                        )}
                     </div>
-
-                    {/* Envío */}
-                    {order.address && (
-                        <div className={styles.card}>
-                            <h2 className={styles.cardTitle}>
-                                <MapPin size={20} />
-                                Dirección de Envío
-                            </h2>
-                            <div className={styles.customerDetail}>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>Destinatario</span>
-                                    <span className={styles.detailValue}>{order.address.name}</span>
-                                </div>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>Dirección</span>
-                                    <span className={styles.detailValue}>{order.address.address}</span>
-                                </div>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>Ciudad / Provincia</span>
-                                    <span className={styles.detailValue}>{order.address.city}, {order.address.province}</span>
-                                </div>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>Teléfono</span>
-                                    <span className={styles.detailValue}>{order.address.phone}</span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Pago */}
-                    <div className={styles.card}>
-                        <h2 className={styles.cardTitle}>
-                            <CreditCard size={20} />
-                            Método de Pago
-                        </h2>
-                        <div className={styles.detailItem}>
-                            <span className={styles.detailValue}>{order.paymentMethod || 'No especificado'}</span>
-                        </div>
-                    </div>
-
-                    {/* Tracking */}
-                    {order.trackingNumber && (
-                        <div className={styles.card}>
-                            <h2 className={styles.cardTitle}>
-                                <Truck size={20} />
-                                Seguimiento
-                            </h2>
-                            <div className={styles.trackingBox}>
-                                <span className={styles.trackingNumber}>{order.trackingNumber}</span>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

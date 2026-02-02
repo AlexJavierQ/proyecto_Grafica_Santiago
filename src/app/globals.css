@@ -86,8 +86,8 @@ body {
   --navbar-height: 64px;
 }
 
-/* Main content padding for fixed navbar (pages without hero) */
-main:not(.home-main) {
+/* Main content padding for fixed navbar (pages without hero or admin) */
+main:not(.home-main):not(.admin-main) {
   padding-top: var(--navbar-height);
 }
 

@@ -1,0 +1,424 @@
+.container {
+    padding: 1.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.header p {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0 0;
+}
+
+.addBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addBtn:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* Stats */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.statCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #1e293b;
+    border-radius: 12px;
+    border: 1px solid #334155;
+}
+
+.statCard svg {
+    color: #3b82f6;
+}
+
+.statValue {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.statLabel {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.searchBox svg {
+    color: #64748b;
+}
+
+.searchBox input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.filterTabs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filterTab {
+    padding: 0.75rem 1rem;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filterTab:hover {
+    background: #334155;
+}
+
+.filterTab.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Discount Card */
+.discountCard {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.discountCard:hover {
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.discountCard.inactive {
+    opacity: 0.6;
+}
+
+.discountCard.expired {
+    border-color: #ef4444;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.discountBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.85rem;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.cardActions {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.cardActions button {
+    padding: 0.4rem;
+    background: rgba(148, 163, 184, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cardActions button:hover {
+    background: rgba(148, 163, 184, 0.2);
+    color: #f1f5f9;
+}
+
+.cardActions .deleteBtn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.discountName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0 0 0.35rem 0;
+}
+
+.discountDesc {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.applyTo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(148, 163, 184, 0.1);
+    border-radius: 6px;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.dates {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.expiredBadge,
+.upcomingBadge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.expiredBadge {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.upcomingBadge {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+/* Empty & Loading */
+.empty,
+.loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #64748b;
+    text-align: center;
+}
+
+.empty h3 {
+    color: #94a3b8;
+    margin: 1rem 0 0.5rem;
+}
+
+.empty p {
+    margin: 0;
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h2 {
+    color: #f1f5f9;
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem 0;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    padding: 0.75rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.radioGroup label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.radioGroup input[type="radio"] {
+    width: auto;
+    accent-color: #3b82f6;
+}
+
+.formActions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.cancelBtn {
+    flex: 1;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #94a3b8;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cancelBtn:hover {
+    background: #334155;
+}
+
+.submitBtn {
+    flex: 1;
+    padding: 0.75rem;
+    background: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: #2563eb;
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}

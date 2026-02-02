@@ -75,6 +75,7 @@ model Category {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   products    Product[]
+  discounts   Discount[]
 
   @@map("categories")
 }
@@ -97,6 +98,7 @@ model Product {
   updatedAt          DateTime            @updatedAt
   inventoryMovements InventoryMovement[]
   orderItems         OrderItem[]
+  discounts          Discount[]
   category           Category?           @relation(fields: [categoryId], references: [id])
 
   @@map("products")
@@ -153,3 +155,32 @@ model InventoryMovement {
 
   @@map("inventory_movements")
 }
+
+model Discount {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  type        String    @default("PERCENTAGE") // PERCENTAGE, FIXED_AMOUNT
+  value       Float     // Valor del descuento (porcentaje o monto fijo)
+  
+  // Aplicación (uno u otro, no ambos)
+  productId   String?
+  categoryId  String?
+  
+  // Vigencia
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean   @default(true)
+  
+  // Metadatos
+  usageCount  Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relaciones
+  product     Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("discounts")
+}
+

@@ -3,19 +3,17 @@
 .main {
     min-height: calc(100vh - 200px);
     background:
-        linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.97) 0%, rgba(30, 41, 59, 0.95) 100%),
         url('https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=1920&q=80') center/cover no-repeat fixed;
-    padding: 1rem 0;
+    padding: 2rem 0;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Eliminado overflow: hidden para evitar cortes */
 }
 
 .container {
     max-width: 1400px;
-    /* Aumentado para aprovechar espacio */
     width: 95%;
     margin: 0 auto;
     padding: 0 1rem;
@@ -24,13 +22,13 @@
 /* Header */
 .header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .badge {
     display: inline-block;
     padding: 0.5rem 1.25rem;
-    background: rgba(59, 130, 246, 0.1);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(96, 165, 250, 0.1) 100%);
     color: #60a5fa;
     border-radius: 999px;
     font-size: 0.85rem;
@@ -38,20 +36,22 @@
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .header h1 {
     font-family: 'Outfit', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 800;
-    color: var(--secondary);
-    margin-bottom: 0.5rem;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
 }
 
 .header p {
-    color: #a0aec0;
+    color: #94a3b8;
     font-size: 1.2rem;
     max-width: 600px;
     margin: 0 auto;
@@ -74,17 +74,17 @@
 .infoSection {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .infoCard {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.85rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeUp 0.6s ease forwards;
@@ -120,20 +120,21 @@
 
 .infoCard:hover {
     background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
     transform: translateX(5px);
 }
 
 .infoIcon {
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, var(--secondary) 0%, #ffd700 100%);
-    border-radius: 12px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary);
+    color: white;
     flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
 .infoIcon svg {
@@ -156,7 +157,7 @@
 }
 
 .muted {
-    color: #718096 !important;
+    color: #64748b !important;
     font-size: 0.85rem !important;
 }
 
@@ -167,9 +168,8 @@
     justify-content: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-    /* Separación abajo ahora */
     margin-top: 0;
-    padding: 1rem 2rem;
+    padding: 1.15rem 2rem;
     background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
     color: white;
     font-weight: 700;
@@ -181,8 +181,6 @@
     opacity: 0;
     animation: fadeUp 0.6s ease forwards;
 }
-
-
 
 .whatsappButton:hover {
     transform: translateY(-3px);
@@ -198,11 +196,10 @@
 
 .mapContainer {
     width: 100%;
-    min-height: 320px;
-    /* Reducido para que quepa mejor */
+    min-height: 350px;
     border-radius: 20px;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.2);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     opacity: 0;
     animation: fadeUp 0.6s ease 0.2s forwards;
@@ -210,22 +207,22 @@
 
 .mapInfo {
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 20px;
     text-align: center;
 }
 
 .mapInfo h3 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: white;
     margin-bottom: 0.75rem;
 }
 
 .mapInfo p {
-    color: #a0aec0;
+    color: #94a3b8;
     font-size: 1rem;
     line-height: 1.6;
     max-width: 500px;
@@ -243,7 +240,7 @@
     }
 
     .mapContainer {
-        height: 300px;
+        min-height: 280px;
     }
 
     .infoCard {

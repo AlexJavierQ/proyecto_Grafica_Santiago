@@ -13,7 +13,10 @@ import {
     Menu,
     X,
     Boxes,
-    UserCheck
+    UserCheck,
+    Percent,
+    ChevronLeft,
+    ChevronRight
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import styles from './layout.module.css'
@@ -30,6 +33,7 @@ const menuGroups = [
         items: [
             { href: '/admin/productos', label: 'Productos', icon: Package },
             { href: '/admin/categorias', label: 'Categorías', icon: Boxes },
+            { href: '/admin/descuentos', label: 'Descuentos', icon: Percent },
             { href: '/admin/ordenes', label: 'Órdenes', icon: ShoppingCart },
             { href: '/admin/mayoristas', label: 'Mayoristas', icon: UserCheck },
         ]
@@ -51,6 +55,7 @@ export default function AdminLayout({
     const pathname = usePathname()
     const router = useRouter()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isCollapsed, setIsCollapsed] = useState(false)
     const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null)
     const [currentTime, setCurrentTime] = useState(new Date())
 
@@ -88,13 +93,13 @@ export default function AdminLayout({
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${isCollapsed ? styles.collapsed : ''}`}>
             {/* Sidebar */}
-            <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+            <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''} ${isCollapsed ? styles.sidebarCollapsed : ''}`}>
                 <div className={styles.sidebarHeader}>
                     <Link href="/admin" className={styles.logo}>
                         <Package className={styles.logoIcon} />
-                        <span>Admin Panel</span>
+                        {!isCollapsed && <span>Admin Panel</span>}
                     </Link>
                     <button
                         className={styles.closeSidebar}
@@ -107,7 +112,7 @@ export default function AdminLayout({
                 <nav className={styles.nav}>
                     {menuGroups.map((group, groupIdx) => (
                         <div key={groupIdx} className={styles.navGroup}>
-                            <h3 className={styles.navGroupTitle}>{group.title}</h3>
+                            {!isCollapsed && <h3 className={styles.navGroupTitle}>{group.title}</h3>}
                             <div className={styles.navGroupItems}>
                                 {group.items.map((item) => {
                                     const Icon = item.icon
@@ -120,11 +125,12 @@ export default function AdminLayout({
                                             href={item.href}
                                             className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
                                             onClick={() => setIsSidebarOpen(false)}
+                                            title={isCollapsed ? item.label : undefined}
                                         >
                                             <div className={styles.navIconWrapper}>
                                                 <Icon size={18} />
                                             </div>
-                                            <span>{item.label}</span>
+                                            {!isCollapsed && <span>{item.label}</span>}
                                         </Link>
                                     )
                                 })}
@@ -134,20 +140,36 @@ export default function AdminLayout({
                 </nav>
 
                 <div className={styles.sidebarFooter}>
-                    <div className={styles.userInfo}>
-                        <div className={styles.avatar}>
+                    {!isCollapsed && (
+                        <div className={styles.userInfo}>
+                            <div className={styles.avatar}>
+                                {user.name.charAt(0).toUpperCase()}
+                            </div>
+                            <div className={styles.userDetails}>
+                                <span className={styles.userName}>{user.name}</span>
+                                <span className={styles.userRole}>{user.role}</span>
+                            </div>
+                        </div>
+                    )}
+                    {isCollapsed && (
+                        <div className={styles.avatar} style={{ margin: '0 auto' }}>
                             {user.name.charAt(0).toUpperCase()}
                         </div>
-                        <div className={styles.userDetails}>
-                            <span className={styles.userName}>{user.name}</span>
-                            <span className={styles.userRole}>{user.role}</span>
-                        </div>
-                    </div>
-                    <button className={styles.logoutButton} onClick={handleLogout}>
+                    )}
+                    <button className={styles.logoutButton} onClick={handleLogout} title="Cerrar Sesión">
                         <LogOut size={20} />
-                        <span>Cerrar Sesión</span>
+                        {!isCollapsed && <span>Cerrar Sesión</span>}
                     </button>
                 </div>
+
+                {/* Botón colapsar */}
+                <button
+                    className={styles.collapseBtn}
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    title={isCollapsed ? 'Expandir' : 'Colapsar'}
+                >
+                    {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+                </button>
             </aside>
 
             {/* Overlay móvil */}
@@ -156,7 +178,7 @@ export default function AdminLayout({
             )}
 
             {/* Main content */}
-            <main className={styles.main}>
+            <main className={`${styles.main} admin-main`}>
                 <header className={styles.header}>
                     <div className={styles.headerLeft}>
                         <button
