@@ -71,11 +71,9 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                     return (
                                         <li key={item.id} className={styles.item}>
                                             <div className={styles.itemImage}>
-                                                <Image
+                                                <img
                                                     src={itemImage}
                                                     alt={item.name}
-                                                    width={70}
-                                                    height={70}
                                                     className={styles.image}
                                                 />
                                             </div>

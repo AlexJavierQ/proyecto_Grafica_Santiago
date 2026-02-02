@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useCartStore } from '@/lib/store'
+import { parseImages } from '@/lib/utils'
 import styles from './page.module.css'
 import { ShoppingCart } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -26,13 +27,8 @@ export default function AddToCart({ product }: AddToCartProps) {
     const handleAddToCart = () => {
         setIsAdding(true)
 
-        let imageUrl = '/placeholder.jpg'
-        try {
-            const images = JSON.parse(product.images)
-            imageUrl = images[0] || '/placeholder.jpg'
-        } catch (e) {
-            console.error('Error parsing images', e)
-        }
+        const imageList = parseImages(product.images)
+        const imageUrl = imageList[0] || '/placeholder-product.jpg'
 
         addItem({
             id: product.id,
