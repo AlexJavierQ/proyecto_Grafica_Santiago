@@ -21,7 +21,6 @@ async function getFeaturedProducts() {
   return products
 }
 
-// async function getFeaturedProducts... (keep as is)
 
 async function getCategories() {
   const categories = await prisma.category.findMany({
@@ -34,7 +33,6 @@ async function getCategories() {
   return categories
 }
 
-// ... remove categoryImages and getCategoryImage functions ...
 
 export default async function HomePage() {
   const [products, categories] = await Promise.all([
@@ -87,7 +85,6 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-// ... rest of the file
 
         {/* FEATURED PRODUCTS */}
         <section className={styles.featured}>
